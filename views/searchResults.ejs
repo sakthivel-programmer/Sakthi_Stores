@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= heading %></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .product_details{
+                position: relative;
+                height: 100%;
+                width: auto;
+                border: 2px solid blue;
+                list-style-type:none;
+                margin: 10px;
+                border-radius: 10px;
+            }
+            .product_details li{
+                list-style-type:none;
+                margin-left: -20px;
+                font-size:xx-large;
+            }
+            li button{
+                width: 30%;
+                background-color: lightblue;
+                color: black;
+                border-radius: .5rem;
+                margin-top: 20px;
+            }
+            .innerDiv a{
+                right:10px;
+                top: 10px;
+                text-decoration: none;
+            }
+            .go_back_button{
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                display: block;
+                margin: auto;
+                height: 40px;
+                margin-bottom: 20px;
+                border: 2px solid lightblue;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <% for(let i of searchResult){%>
+            <div class="product_details">
+                <a href="/user/backUserSession"><button class="go_back_button">Go to User page</button></a>
+                <ul>
+                    <li style="font-size: 70px; margin-bottom: 20px;"><%=i.productName %></li>
+                    <li><b>Price : </b> Rs.<%=i.price %> </li>
+                    <li><b>Rating : </b> <%= i.productRating%>/5 </li>
+                    <li><b>In Stock : </b><%=i.qtyAvailable%> Qty </li>
+                    <li><b>Category : </b> <%=i.category%> </li>
+                    <li><a href="/user/buyNow"><button><b> Buy Now</b></button></a></li>
+                </ul>
+            </div>
+        <%}%>
+    </body>
+</html>

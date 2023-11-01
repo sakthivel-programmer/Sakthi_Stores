@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= heading %></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body{
+                margin: auto;
+                display: flex;
+                justify-content: center;
+                background-color: azure;
+            }
+            .nav-bar{
+                position: relative;
+                top:30px;
+                height: auto;
+                width: 95vw;
+            }
+            .nav-bar img{
+                width: 120px;
+                border-radius: 10px;
+            }
+            .nav-bar button{
+                position: relative;
+                margin-top: 5px;
+                float: right;
+                height: 40px;
+                border: 2px solid lightblue;
+                border-radius: 5px;
+            }
+            .innerDiv{
+                position: relative;
+                top:35%;
+                padding: 2%;
+                height:90%;
+                width:95vw;
+                margin: auto;
+                border: 2px solid black;
+                border-radius: 10px;
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .innerDiv ul{
+                margin-top: 5%;
+                height: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            .product_details{
+                position: relative;
+                height: auto;
+                width: 15%;
+                border: 2px solid blue;
+                list-style-type:none;
+                margin: 10px;
+                border-radius: 10px;
+            }
+            .product_details li{
+                list-style-type:none;
+                margin-left: -20px;
+                font-size: small;
+            }
+            .product_details li button{
+                border: none;
+                outline: none;
+                background: none;
+            }
+            .product_details a{
+                cursor: pointer;
+            }
+            .deleteProduct{
+                position: absolute;
+                right: -10px;
+                top:-12px;
+                width:1.4rem;
+                text-align: center;
+                border-radius: 50%;
+                background-color: red;
+                color: white;
+                text-decoration: none;
+            }
+
+        
+        </style>
+    </head>
+    <body>
+        <div>
+            <div class="nav-bar">
+                <img src="../assets/images/logo2.png" class="col-1"></img>
+                <a href="/admin/signOut" class="col-1"><button >Sign Out</button></a>
+                <a href="/admin/addProduct" class="col-1"><button style="margin-right:10px;">Add Product</button></a>                    
+            </div>
+            <div class="innerDiv">
+                <%if(products){%>
+                    <% for(let product of products){%>
+                    <div class="product_details">
+                        <a href="/admin/deleteProduct/<%=product.id%>" class="deleteProduct">X</a>
+                        <ul>
+                            <li><h5 style="display: inline;"><%=product.productName %></h5>
+                                <form style="display: inline;" action="/admin/localStorage" method="POST">
+                                    <input name="updateValue" type="hidden" value="productName">
+                                    <input name="productId" type="hidden" value="<%= product.id %>">
+                                    <button type="submit" value data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i>
+                                </button>
+                                </form>
+                            </li>
+                            <li><b>Price : </b> Rs.<%=product.price %>
+                                <form style="display: inline;" action="/admin/localStorage" method="POST">
+                                    <input name="updateValue" type="hidden" value="price">
+                                    <input name="productId" type="hidden" value="<%= product.id %>">
+                                    <button type="submit" value data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li><b>Rating : </b> <%= product.productRating%>/5 
+                                <form style="display: inline;" action="/admin/localStorage" method="POST">
+                                    <input name="updateValue" type="hidden" value="productRating">
+                                    <input name="productId" type="hidden" value="<%= product.id %>">
+                                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li><b>In Stock : </b><%=product.qtyAvailable%> Qty 
+                                <form style="display: inline;" action="/admin/localStorage" method="POST">
+                                    <input name="updateValue" type="hidden" value="qtyAvailable">
+                                    <input name="productId" type="hidden" value="<%= product.id %>">
+                                    <button type="submit" value data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li><b>Category : </b> <%=product.category%> 
+                                <form style="display: inline;" action="/admin/localStorage" method="POST">
+                                    <input name="updateValue" type="hidden" value="category">
+                                    <input name="productId" type="hidden" value="<%= product.id %>">
+                                    <button type="submit" value data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </form>                            
+                            </li>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" style="color:black; opacity:80%;"id="exampleModalLabel">Update</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin/update" method="POST">
+                                                <input type="text" class="text-box" name="newValue"placeholder="Enter user's name">
+                                                <button type="submit" class="submit-btn" >Save changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                    
+                    <%}%>    
+                <%}%>
+
+            </div>
+        </div>
+             
+        <script src="https://kit.fontawesome.com/91b25f8033.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>
