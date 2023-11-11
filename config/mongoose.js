@@ -16,7 +16,7 @@ const mongoose = require('mongoose');
 //fill your database name here
 
 mongoose.connect(
-  'mongodb+srv://klsakthi333:Mongoose@cluster0.@Sakthi333.mongodb.net/review_managment_system_db?retryWrites=true&w=majority',
+  'mongodb+srv://singh99vikas:Mongoose@cluster0.snh5a.mongodb.net/review_managment_system_db?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
