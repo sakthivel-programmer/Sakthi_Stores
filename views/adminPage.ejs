@@ -109,22 +109,6 @@
                                     <input name="productId" type="hidden" value="<%= product.id %>">
                                     <button type="submit" value data-bs-toggle="modal1" data-bs-target="#exampleModal1"><i class="fa-solid fa-pen"></i>
                                 </button>
-                                <div class="modal1 fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" style="color:black; opacity:80%;"id="exampleModalLabel">Update</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="/admin/update/["productName",<%=product.id %>]" method="POST">
-                                                    <input type="text" class="text-box" name="newValue"placeholder="Enter user's name">
-                                                    <button type="submit" class="submit-btn" >Save changes</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 </form>
                             </li>
                             <li><b>Price : </b> Rs.<%=product.price %>
@@ -157,11 +141,26 @@
                                     <input name="productId" type="hidden" value="<%= product.id %>">
                                     <button type="submit" value data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen"></i>
                                     </button>
-                                </form>                            
+                                </form>   
                             </li>
                         </ul>
+                        <div class="modal1 fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" style="color:black; opacity:80%;"id="exampleModalLabel">Update</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin/update" method="POST">
+                                                <input type="text" class="text-box" name="newValue"placeholder="Enter user's name">
+                                                <button type="submit" class="submit-btn" >Save changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                    
                     <%}%>    
                 <%}%>
 
