@@ -2,7 +2,7 @@
 const User=require("../models/schema");
 // requiring product schema
 const Product=require("../models/products");
-var store = require('store')
+const sessionStorage = require('sessionstorage-for-node');
 
 // controller for render logon page
 module.exports.Logon = function(req,res){
@@ -177,15 +177,15 @@ module.exports.buyNow=async function(req,res){
 module.exports.localStorage=function(req,res){
     // localStorage.setItem('fieldName', req.body.updateValue)
     // localStorage.setItem('productId', req.body.productId)
-    store.set('fieldName', req.body.updateValue)
-    store.set('productId', req.body.productId)
+    sessionStorage.setItem('fieldName', req.body.updateValue);
+    sessionStorage.setItem('productId', req.body.productId);
 }
 
 // controller for updating changes
 module.exports.update=async function(req,res){
     // fetching from local storage
-    const fieldName=store.get("fieldName");
-    const productId=store.get("productId");
+    const fieldName=sessionStorage.getItem("fieldName");
+    const productId=sessionStorage.getItem("productId");
     console.log(fieldName,productId)
     // swicth cases upon product fieldname to update 
     if(fieldName === "productName"){
