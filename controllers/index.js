@@ -2,7 +2,8 @@
 const User=require("../models/schema");
 // requiring product schema
 const Product=require("../models/products");
-const localStorage = require("localStorage");
+// const localStorage = require("localStorage");
+var store = require('store')
 
 // controller for render logon page
 module.exports.Logon = function(req,res){
@@ -175,19 +176,17 @@ module.exports.buyNow=async function(req,res){
 // faced issue on passing multiple parameters on req
 // local storage for store fieldname and product id while updating product details
 module.exports.localStorage=function(req,res){
-    
-    localStorage.setItem('fieldName', req.body.updateValue)
-    localStorage.setItem('productId', req.body.productId)
-    console.log("In localstorage",localStorage.getItem("fieldName"))
+    store.set('fieldName', req.body.updateValue)
+    store.set('productId', req.body.productId)
 }
 
 // controller for updating changes
 module.exports.update=async function(req,res){
     
     // fetching from local storage
-    const fieldName=localStorage.getItem("fieldName");
-    const productId=localStorage.getItem("productId");
-    console.log("In update",req.params.data)
+    const fieldName=store.get("fieldName");
+    const productId=store.get("productId");
+    console.log("In update",fieldName,productId)
     // swicth cases upon product fieldname to update 
     if(fieldName === "productName"){
         await Product.findByIdAndUpdate(productId,{"productName":req.body.newValue})
