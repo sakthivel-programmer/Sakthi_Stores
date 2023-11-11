@@ -182,12 +182,12 @@ module.exports.localStorage=function(req,res){
 }
 
 // controller for updating changes
-module.exports.update=async function(req,res){
+module.exports.update=async function(req,res,s=localStorage.getItem("fieldName"),d=localStorage.getItem("productId")){
     
     // fetching from local storage
     const fieldName=localStorage.getItem("fieldName");
     const productId=localStorage.getItem("productId");
-    console.log("In update",productId,fieldName,localStorage.getItem('fieldName'))
+    console.log("In update",s,d)
     // swicth cases upon product fieldname to update 
     if(fieldName === "productName"){
         await Product.findByIdAndUpdate(productId,{"productName":req.body.newValue})
