@@ -21,7 +21,7 @@ router.get("/signOut",Controller.signOut);
 // router for post product id and field name 
 router.post("/localStorage",Controller.localStorage);
 // router for update changes into DB
-router.post("/update/:data",Controller.update);
+router.post("/update",Controller.update);
 // make router available
 module.exports=router
 
