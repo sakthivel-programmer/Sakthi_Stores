@@ -2,7 +2,6 @@
 const User=require("../models/schema");
 // requiring product schema
 const Product=require("../models/products");
-// const localStorage = require("localStorage");
 var store = require('store')
 
 // controller for render logon page
@@ -171,22 +170,23 @@ module.exports.buyNow=async function(req,res){
 }
 
 // initializong local storage
-
+// const localStorage = require("localStorage");
 
 // faced issue on passing multiple parameters on req
 // local storage for store fieldname and product id while updating product details
 module.exports.localStorage=function(req,res){
+    // localStorage.setItem('fieldName', req.body.updateValue)
+    // localStorage.setItem('productId', req.body.productId)
     store.set('fieldName', req.body.updateValue)
     store.set('productId', req.body.productId)
 }
 
 // controller for updating changes
 module.exports.update=async function(req,res){
-    
     // fetching from local storage
     const fieldName=store.get("fieldName");
     const productId=store.get("productId");
-    console.log("In update",fieldName,productId)
+    console.log(fieldName,productId)
     // swicth cases upon product fieldname to update 
     if(fieldName === "productName"){
         await Product.findByIdAndUpdate(productId,{"productName":req.body.newValue})
@@ -213,7 +213,7 @@ module.exports.update=async function(req,res){
         console.log("Updated!!")
         return res.redirect("/admin/backAdminSession")
     }
-    return res.redirect("back")
+    return res.redirect("/admin/backAdminSession")
 }
 
 // controller for search
@@ -230,3 +230,4 @@ module.exports.search= async function(req,res){
     console.log("Search result not fount, please enter exact product name, SEO is under construction")
     return res.redirect("back")
 }
+
