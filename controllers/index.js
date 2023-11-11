@@ -2,7 +2,7 @@
 const User=require("../models/schema");
 // requiring product schema
 const Product=require("../models/products");
-const sessionStorage = require('sessionstorage');
+// const sessionStorage = require('sessionstorage');
 
 // controller for render logon page
 module.exports.Logon = function(req,res){
