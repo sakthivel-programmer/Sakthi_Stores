@@ -1,8 +1,9 @@
-//Import Module
-const localStorage = require("localStorage");
+const _sessionStorage = {}
 
-//Setting localStorage Item
-let value=0;
-localStorage.setItem('UserName', value) 
+const sessionStorage = {
+  setItem: (key, value) => _sessionStorage[key] = value,
+  getItem: (key) => _sessionStorage[key],
+  removeItem: (key) => delete _sessionStorage[key],
+}
 
-module.exports=localStorage;
+module.exports = sessionStorage
