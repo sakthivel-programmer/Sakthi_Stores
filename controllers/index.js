@@ -2,7 +2,7 @@
 const User=require("../models/schema");
 // requiring product schema
 const Product=require("../models/products");
-const localStorage = require("localStorage");
+// const localStorage = require("localStorage");
 
 // controller for render logon page
 module.exports.Logon = function(req,res){
