@@ -170,7 +170,6 @@ module.exports.buyNow=async function(req,res){
 
 // initializong local storage
 const localStorage = require("localStorage");
-const e = require("express");
 
 // faced issue on passing multiple parameters on req
 // local storage for store fieldname and product id while updating product details
@@ -187,23 +186,28 @@ module.exports.update=async function(req,res){
     // swicth cases upon product fieldname to update 
     if(fieldName === "productName"){
         await Product.findByIdAndUpdate(productId,{"productName":req.body.newValue})
-        return res.redirect("back")
+        console.log("Updated!!")
+        return res.redirect("/admin/backAdminSession")
     }
     else if(fieldName === "price"){
         await Product.findByIdAndUpdate(productId,{"price":req.body.newValue})
-        return res.redirect("back")
+        console.log("Updated!!")
+        return res.redirect("/admin/backAdminSession")
     }
     else if(fieldName === "productRating"){
         await Product.findByIdAndUpdate(productId,{"productRating":req.body.newValue})
-        return res.redirect("back")
+        console.log("Updated!!")
+        return res.redirect("/admin/backAdminSession")
     }
     else if(fieldName === "qtyAvailable"){
         await Product.findByIdAndUpdate(productId,{"qtyAvailable":req.body.newValue})
-        return res.redirect("back")
+        console.log("Updated!!")
+        return res.redirect("/admin/backAdminSession")
     }
     else if(fieldName === "category"){
         await Product.findByIdAndUpdate(productId,{"category":req.body.newValue})
-        return res.redirect("back")
+        console.log("Updated!!")
+        return res.redirect("/admin/backAdminSession")
     }
     return res.redirect("back")
 }
@@ -222,4 +226,3 @@ module.exports.search= async function(req,res){
     console.log("Search result not fount, please enter exact product name, SEO is under construction")
     return res.redirect("back")
 }
-
