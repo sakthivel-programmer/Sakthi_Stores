@@ -2,6 +2,7 @@
 const User=require("../models/schema");
 // requiring product schema
 const Product=require("../models/products");
+const localStorage = require("localStorage");
 
 // controller for render logon page
 module.exports.Logon = function(req,res){
@@ -169,14 +170,15 @@ module.exports.buyNow=async function(req,res){
 }
 
 // initializong local storage
-const localStorage = require("localStorage");
+
 
 // faced issue on passing multiple parameters on req
 // local storage for store fieldname and product id while updating product details
 module.exports.localStorage=function(req,res){
-    console.log("In localstorage",req.body.updateValue,req.body.productId)
+    
     localStorage.setItem('fieldName', req.body.updateValue)
     localStorage.setItem('productId', req.body.productId)
+    console.log("In localstorage",req.body.updateValue,req.body.productId)
 }
 
 // controller for updating changes
