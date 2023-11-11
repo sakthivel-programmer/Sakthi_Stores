@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 //fill your database name here
 
 mongoose.connect(
-  'mongodb+srv://singh99vikas:Mongoose@cluster0.snh5a.mongodb.net/review_managment_system_db?retryWrites=true&w=majority',
+  'mongodb+srv://klsakthi3344:klsakthi333@cluster0.b9ziqxt.mongodb.net/',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
