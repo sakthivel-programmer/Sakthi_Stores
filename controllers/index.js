@@ -178,7 +178,7 @@ module.exports.localStorage=function(req,res){
     
     localStorage.setItem('fieldName', req.body.updateValue)
     localStorage.setItem('productId', req.body.productId)
-    console.log("In localstorage",req.body.updateValue,req.body.productId)
+    console.log("In localstorage",localStorage.getItem("fieldName"))
 }
 
 // controller for updating changes
