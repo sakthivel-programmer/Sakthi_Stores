@@ -174,10 +174,8 @@ const localStorage = require("localStorage");
 // faced issue on passing multiple parameters on req
 // local storage for store fieldname and product id while updating product details
 module.exports.localStorage=function s(req,res){
-    var s =localStorage.setItem('fieldName', req.body.updateValue)
-    
-    var h=localStorage.setItem('productId', req.body.productId)
-    return h
+    localStorage.setItem('fieldName', req.body.updateValue)
+    localStorage.setItem('productId', req.body.productId)
     // sessionStorage.setItem('fieldName', req.body.updateValue);
     // sessionStorage.setItem('productId', req.body.productId);
 }
