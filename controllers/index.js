@@ -2,6 +2,7 @@
 const User=require("../models/schema");
 // requiring product schema
 const Product=require("../models/products");
+var store = require('store')
 
 // controller for render logon page
 module.exports.Logon = function(req,res){
@@ -169,23 +170,26 @@ module.exports.buyNow=async function(req,res){
 }
 // local storage for store fieldname and product id while updating product details
 module.exports.creatingCookies=async function(req,res){
-    await res.cookie("fieldName",req.body.updateValue);
-    await res.cookie("productId",req.body.productId);
+    // setting values to cookie
+    await res.cookie("fieldName",req.query.name);
+    await res.cookie("productId",req.query.id);
+    // rendering modal to update new value
     return res.status(200).render("modal")
 }
 
 // controller for updating changes
 module.exports.update=async function(req,res){
-    // fetching from local storage
-    const fieldName=await req.cookies.fieldName
-    const productId=await req.cookies.productId
+    // fetching from cookies
+    var fieldName=await req.cookies.fieldName
+    var productId=await req.cookies.productId
     // swicth cases upon product fieldname to update 
     if(fieldName === "productName"){
+        console.log("yes")
         await Product.findByIdAndUpdate(productId,{"productName":req.body.newValue})
         console.log("Updated!!")
         return res.redirect("/admin/backAdminSession")
     }
-    else if(fieldName === "price"){
+    if(fieldName === "price"){
         await Product.findByIdAndUpdate(productId,{"price":req.body.newValue})
         console.log("Updated!!")
         return res.redirect("/admin/backAdminSession")
