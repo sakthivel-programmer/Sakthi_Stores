@@ -167,25 +167,18 @@ module.exports.buyNow=async function(req,res){
         heading: "Buy Now",
     })
 }
-
-// initializong local storage
-const localStorage = require("localStorage");
-
-// faced issue on passing multiple parameters on req
 // local storage for store fieldname and product id while updating product details
-module.exports.localStorage=function s(req,res){
-    localStorage.setItem('fieldName', req.body.updateValue)
-    localStorage.setItem('productId', req.body.productId)
-    // sessionStorage.setItem('fieldName', req.body.updateValue);
-    // sessionStorage.setItem('productId', req.body.productId);
+module.exports.creatingCookies=async function(req,res){
+    await res.cookie("fieldName",req.body.updateValue);
+    await res.cookie("productId",req.body.productId);
+    return res.status(200).render("modal")
 }
 
 // controller for updating changes
 module.exports.update=async function(req,res){
     // fetching from local storage
-    const fieldName=localStorage.getItem("fieldName");
-    const productId=localStorage.getItem("productId");
-    console.log(fieldName,productId,s())
+    const fieldName=await req.cookies.fieldName
+    const productId=await req.cookies.productId
     // swicth cases upon product fieldname to update 
     if(fieldName === "productName"){
         await Product.findByIdAndUpdate(productId,{"productName":req.body.newValue})
