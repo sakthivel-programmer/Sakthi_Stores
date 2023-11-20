@@ -4,10 +4,14 @@ const express=require("express");
 const port=3000;
 // calling our express as function
 const app=express();
+// requiring cookie parser
+const cookieParser = require('cookie-parser');
 // body data parser
 app.use(express.urlencoded());
 // recuiring db
-const db=require("./config/mongoose")
+const db=require("./config/mongoose");
+// Calling cookie parser as middleware
+app.use(cookieParser());
 // EJS view engine
 app.set("views","./views");
 app.set("view engine", "ejs");
