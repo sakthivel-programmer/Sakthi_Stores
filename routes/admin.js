@@ -19,7 +19,7 @@ router.get("/deleteProduct/:id",Controller.deleteProduct);
 // router for adming sign out page
 router.get("/signOut",Controller.signOut);
 // router for post product id and field name 
-router.post("/localStorage",Controller.localStorage);
+router.get("/creatingCookies",Controller.creatingCookies);
 // router for update changes into DB
 router.post("/update",Controller.update);
 // make router available
