@@ -64,8 +64,7 @@
                 flex-wrap: wrap;
             }
             .innerDiv ul{
-                margin-top: 5%;
-                margin-left: -10px;
+                margin-top: 3%;
                 height: 90%;
                 display: flex;
                 flex-direction: column;
@@ -74,11 +73,12 @@
             .product_details{
                 position: relative;
                 height: auto;
-                padding: 15px;
+                padding: 1px;
                 width: auto;
                 border: 2px solid blue;
                 list-style-type:none;
-                margin: 10px;
+                margin: auto;
+                margin-bottom: 15px;
                 border-radius: 10px;
                 transition: all .2s;
             }
@@ -92,11 +92,12 @@
                 font-size: small;
             }
             li button{
-                width: 93%;
+                width: 95%;
                 background-color: lightblue;
                 color: black;
                 border-radius: .5rem;
                 margin: auto;
+                margin-top: 10px;
             }
             .product_details a{
                 cursor: pointer;
@@ -112,6 +113,22 @@
                 color: white;
                 text-decoration: none;
             }
+            .product_name{
+                margin-bottom: 10px;
+                text-shadow: 1px 1px greenyellow;
+            }
+            @media screen and (min-width:700px){
+                .product_details{
+                    width: 290px;
+                    height: 100%;
+                }
+            }
+            @media screen and (max-width:700px){
+                .product_details{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
     
         </style>
     </head>
@@ -121,7 +138,7 @@
                 <img src="../assets/images/logo2.png" class="col-1"></img>
                 <!-- form tag for search products -->
                 <form action="/user/search" method="POST" style="display: inline;" class="col-1">
-                    <input type="search" name="searchContent" class="search_box" placeholder="Is Someone Searching for Something?🧐">
+                    <input type="search" name="searchContent" class="search_box" placeholder="Is someone searching for something?🧐">
                     <button class="searchButton" type="submit">Let's find😋</button> 
                 </form>
                 <a href="/admin/signOut" class="col-1"><button class="sign_out">Sign Out</button></a>
@@ -133,7 +150,7 @@
                     <% for(let product of products){%>
                     <div class="product_details">
                         <ul>
-                            <li><h5><%=product.productName %></h5></li>
+                            <li class="product_name"><h5><%=product.productName %></h5></li>
                             <li><b>Price : </b> Rs.<%=product.price %></li>
                             <li><b>Rating : </b> <%= product.productRating%>/5</li>
                             <li><b>In Stock : </b><%= product.qtyAvailable%> Qty</li>
