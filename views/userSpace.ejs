@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= heading %></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/css/user_space.css">
+    </head>
+    <body>
+        <div>
+            <div class="nav-bar">
+                <img src="../assets/images/logo.jpg" class="col-1"></img>
+                <!-- form tag for search products -->
+                <form action="/user/search" method="POST" style="display: inline;" class="col-1">
+                    <input type="search" name="searchContent" class="search_box" placeholder="Hello <%=user_name%>, Loot name?🧐">
+                    <button class="searchButton" type="submit">Let's find😋</button> 
+                </form>
+                <a href="/admin/signOut" class="col-1"><i class="fa-solid fa-3x fa-right-from-bracket sign_out"></i></a>
+                
+            </div>
+            <div class="innerDiv xs-grid">
+                <!-- Every existing products from the sakthi store DB is rendered here -->
+                <%if(products){%>
+                    <% for(let product of products){%>
+                        <div class="product_details">
+                        <form action="/user/detailed_view" method="post">
+                            <input type="hidden" name="product_name" value="<%=product.productName%>">
+                            <div>
+                                <ul>
+                                    <li class="product_name"><h4><%=product.productName %></h4></li>
+                                    <center>
+                                        <button style="background: none; border: none;">
+                                        <img src="../assets/images/products/<%=product.imageName%>" alt="image" role="button">
+                                    </button>
+                                    </center>
+                                    <br>
+                                    <li><b>Price : </b> Rs.<%=product.price %></li>
+                                    <li><b>Rating : </b> <%= product.productRating%>/5</li>
+                                    <li><b>In Stock : </b><%= product.qtyAvailable%> Qty</li>
+                                </ul>
+                                <a href="/user/buyNow"><button type="button" class="buyNow"><b> <i class="fa-solid fa-cart-shopping"></i> <h4 class="d-inline-flex">Buy Now<h4></b></button></a>
+                            </div>
+                         </form>
+                        </div>
+                    <%}%>    
+                <%}%>
+            </div>
+            <br><br>
+            <div class="footer-div">
+                <button class="back-to-top" onclick="scrollToTop()">Back to top</button>
+                <div class="info-divs">
+                    <div class="desc info-div">
+                        <h2>Sakthi Stores</h2>
+                        <p>An ecommerce business uses digital methods to sell products and services to customers. Ecommerce businesses can be online-only or have a physical presence as well. Selling to customers online typically requires a website or digital storefront, plus a way to process payments digitally and ship orders to customers.</p>
+                    </div>
+                    <div class="info-div"> 
+                        <h2>Address</h2>
+                        <p>Oodaimedu,<br>
+                        Mountain road,<br>
+                        Oodaimedu 4 cross road,<br>
+                        Anthiyur,<br>
+                        Erode.<br>
+                        PIN - 638 501</p>
+                    </div>
+                    <div style="margin-left: 30px;" class="info-div">
+                        <h2>About Us</h2>
+                        <p>
+                            <b>Founder:</b> K Sakthivel<br>
+                            <b>CEO:</b> K Sakthivel<br>
+                            <b>Products Admin:</b> K Sakthivel<br>
+                            <b>Website Designer:</b> K Sakthivel<br>
+                            <b>Seller:</b> K Sakthivel<br>
+                            <b>Logistics:</b> K Sakthivel<br>
+                            <b>Customer:</b>  K Sakthivel<br>
+                        </p>
+                    </div>
+
+                </div>
+                <div style="text-align: center;" >
+                    <ul style="display: inline-flex;" class="follow-us">
+                        <li><a href="https://www.facebook.com/KLSakthi.333" target="_blank"><i class="fa-brands fa-2x fa-facebook"></a></i></li>
+                        <li><a href="https://www.instagram.com/haha_sakthi_ks333" target="_blank"><i class="fa-brands fa-2x fa-square-instagram"></i></a></li>
+                        <li><a href="https://twitter.com/klsakthi333" target="_blank"><i class="fa-brands fa-2x fa-square-x-twitter twitter"></i></a></li>
+                        <li><a href="https://github.com/sakthivel-programmer" target="_blank"><i class="fa-brands fa-2x fa-github"></i></a></li>
+                    </ul>
+                    <br><br>
+                    <p class="copyright">Copyright @ Sakthi Stores 2023 All rights reserved</p>
+                </div> 
+            </div>
+        </div>
+        
+        
+        <script>
+            function scrollToTop(){
+                document.body.scrollTop=0;
+                document.documentElement.scrollTop=0;
+            }
+        </script>
+        <script src="https://kit.fontawesome.com/91b25f8033.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>
