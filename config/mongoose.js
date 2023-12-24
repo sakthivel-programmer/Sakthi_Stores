@@ -1,3 +1,4 @@
+const mongoose=require("mongoose");
 mongoose.connect(
   'mongodb+srv://klsakthi3344:klsakthi333@cluster0.b9ziqxt.mongodb.net/',
   {
