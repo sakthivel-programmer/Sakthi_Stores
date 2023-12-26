@@ -261,6 +261,14 @@ body{
         text-align: center;
         margin-left:-40px ;
     }
+    .buyNow{
+        h4{
+            transform:translateX(0px);
+        }
+        i{
+            transform: translateX(0px);
+        }
+    }
 }
 ::-webkit-scrollbar{
     display: none;
