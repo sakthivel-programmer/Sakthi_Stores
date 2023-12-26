@@ -47,3 +47,11 @@ button{
 ::-webkit-scrollbar{
     display: none;
 }
+@media screen and (max-width:700px){
+    .innerDiv{
+        position: relative;
+        top:20%;
+        width: auto;
+        margin: auto 10px;
+    }  
+}
