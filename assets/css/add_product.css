@@ -8,8 +8,8 @@ body{
     position: relative;
     top:70px;
     height:auto;
-    width:500px;
-    margin: auto;
+    width:auto;
+    margin: auto 10px;
     border: 2px solid black;
     border-radius: 10px;
 }
