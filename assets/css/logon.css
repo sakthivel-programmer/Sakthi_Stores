@@ -11,8 +11,8 @@ body{
     position: relative;
     top:70px;
     height:auto;
-    width:500px;
-    margin: auto;
+    width:auto;
+    margin: auto 30px;
     border: 1px solid black;
     border-radius: 15px;
     background-color: transparent;
