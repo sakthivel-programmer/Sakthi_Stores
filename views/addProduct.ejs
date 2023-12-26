@@ -16,7 +16,7 @@
                 <img src="../assets/images/logo.JPG"><img>
                 <!-- form tag which sends admin entered product details to create product route -->
                 <form action="/admin/createProduct" method="POST" class="row">
-                    <input name="name" type="text" class="col-10" placeholder="Enter product name" required>
+                    <input name="name" type="text" class="col-10" placeholder="Enter product name" maxlength="20" required>
                     <input name="price" type="number" class="col-10" placeholder="Enter price" required>
                     <input name="rating" type="number" class="col-10" placeholder="Enter rating" required>
                     <input name="stock" type="number" class="col-10" placeholder="Enter availability" required>
