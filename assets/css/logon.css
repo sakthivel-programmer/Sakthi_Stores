@@ -9,7 +9,7 @@ body{
 }
 .innerDiv{
     position: relative;
-    top:70px;
+    top:60px;
     height:auto;
     width:auto;
     margin: auto 10px;
@@ -54,3 +54,9 @@ button:hover{
     box-shadow: whitesmoke 0px 0px 25px;
     color: black;
 }
+@media screen and (max-width:700px){
+    .innerDiv{
+        position: relative;
+        top:50%;
+}
+    
