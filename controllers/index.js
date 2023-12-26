@@ -145,11 +145,11 @@ module.exports.deleteProduct=async function(req,res){
     if(product){
         await Product.findByIdAndDelete(req.params.id)
         console.log("Product deleted successfully")
-        return res.redirect("back")
+        return res.redirect("/admin/backAdminSession")
     }
     // if not found
     console.log("Product not found to deletion")
-    return res.redirect("back")
+    return res.redirect("/admin/backAdminSession")
 }
 
 // controller for signout
