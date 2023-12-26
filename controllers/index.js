@@ -184,7 +184,7 @@ module.exports.update=async function(req,res){
         console.log("Updated!!")
         return res.redirect("/admin/backAdminSession")
     }
-    if(fieldName === "price"){
+    else if(fieldName === "price"){
         await Product.findByIdAndUpdate(productId,{"price":req.body.newValue})
         console.log("Updated!!")
         return res.redirect("/admin/backAdminSession")
@@ -201,6 +201,11 @@ module.exports.update=async function(req,res){
     }
     else if(fieldName === "category"){
         await Product.findByIdAndUpdate(productId,{"category":req.body.newValue})
+        console.log("Updated!!")
+        return res.redirect("/admin/backAdminSession")
+    }
+    else if(fieldName === "imageName"){
+        await Product.findByIdAndUpdate(productId,{"imageName":req.body.newValue})
         console.log("Updated!!")
         return res.redirect("/admin/backAdminSession")
     }
