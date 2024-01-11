@@ -2,11 +2,13 @@
 const express=require("express");
 //Port number to run server
 const port=3000;
+const bodyParser = require('body-parser');
 // calling our express as function
 const app=express();
 // requiring cookie parser
 const cookieParser = require('cookie-parser');
 // body data parser
+app.use(bodyParser.json());
 app.use(express.urlencoded());
 // recuiring db
 const db=require("./config/mongoose");
