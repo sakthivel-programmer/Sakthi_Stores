@@ -39,7 +39,8 @@ module.exports.createUser=async function(req,res){
         await User.create({
             userName:req.body.name,
             email:req.body.email,
-            password:req.body.password
+            password:req.body.password,
+            cart:[0]
         })
         console.log("User created in DB")
         return res.redirect("/")
@@ -54,28 +55,42 @@ module.exports.createUser=async function(req,res){
 
 // controller for create user session
 module.exports.createSession =async function(req,res){
-    // fiding user in the DB
-    const user=await User.findOne({email:req.body.email})
-    // checking if the password is correct from both the sides
-    if(user){
-        if(user.password===req.body.password){
-            console.log("User signed in")
-            await res.cookie("email",req.body.email)
-            const products=await Product.find()
-            return res.render("userSpace",{
-                heading:"Sakthi Stores",
-                products:products,
-                user_name:user.userName.toLowerCase()
-                
-            })
-        }else{
-            console.log("Password is wrong")
-            return res.redirect("back")
+    if(req.body.email){
+        // fiding user in the DB
+        const user=await User.findOne({email:req.body.email})
+        // checking if the password is correct from both the sides
+        if(user){
+            if(user.password===req.body.password){
+                console.log("User signed in")
+                await res.cookie("email",req.body.email)
+                // await res.cookie("cart",JSON.stringify(user.cart))
+                const products=await Product.find()
+                console.log(user.cart,"Ssssssssss")
+                return res.render("userSpace",{
+                    heading:"Sakthi Stores",
+                    products:products,
+                    cart:user.cart,
+                    user_name:user.userName.toLowerCase(),
+                    
+                })
+            }else{
+                console.log("Password is wrong")
+                return res.redirect("back")
+            }
         }
+        // if user not found, ask user to sign up
+        console.log("User not found, please sign up")
+        return res.redirect("back")
+    }else{
+        const user=await User.findOne({email:req.cookies.email})
+        const products=await Product.find()
+        return res.render("userSpace",{
+            heading:"Sakthi Stores",
+            products:products,
+            cart:user.cart,
+            user_name:user.userName.toLowerCase()
+        })
     }
-    // if user not found, ask user to sign up
-    console.log("User not found, please sign up")
-    return res.redirect("back")
 }
 
 // controller to create admin session
@@ -212,26 +227,51 @@ module.exports.update=async function(req,res){
     return res.redirect("/admin/backAdminSession")
 }
 
-// controller for search
-module.exports.search= async function(req,res){
-    //with product name finding the product in DB
-    const search=await Product.find({"productName":req.body.searchContent})
-    console.log(search,"search")
-    if(search){
-        console.log("Searched product found")
-        return res.render("searchResults",{
-            heading:"Search | Result",
-            searchResult:search
-        })
-    }
-    console.log("Search result not fount, please enter exact product name, SEO is under construction")
-    return res.redirect("back")
-}
 module.exports.detailedView=async function (req,res){
     const product=await Product.find({"productName":req.body.product_name})
-    return res.render("searchResults",{
-        heading:"Product | Details",
-        searchResult:product
+    if(product.length!=0){
+        return res.render("searchResults",{
+            heading:"Product | Details",
+            searchResult:product
+        })
+    }
+    return res.redirect("back")
+}
+module.exports.addToCart=async function(req,res){
+    
+    const user= await User.findOne({email:req.cookies.email})
+    let cartItem=[...user.cart]
+    let total = Number(cartItem[0])
+    total+=Number(req.query.prod_price)
+    cartItem[0]=total
+    cartItem.push({
+        productName:req.query.prod_name,
+        productImage:req.query.prod_image,
+        productPrice:req.query.prod_price
     })
+    await User.findOneAndUpdate({email:req.cookies.email},{cart:cartItem})
+    return res.redirect("back")
 }
 
+module.exports.openCart=async function (req,res){
+    const user= await User.findOne({email:req.cookies.email})
+    return res.render("cart",{
+        heading:"Cart Items",
+        cart:user.cart
+    })
+}
+module.exports.removeFromCart=async function (req,res){
+    const user= await User.findOne({email:req.cookies.email})
+    const removable_item = user.cart.splice(req.params.item_id,1)
+    console.log("removable",req.params.item_id,removable_item)
+    let total = Number(user.cart[0])
+    user.cart[0]= total - Number(removable_item[0].productPrice)
+    await User.findOneAndUpdate({email:req.cookies.email},{cart:user.cart}) 
+    return res.redirect("back")
+}
+module.exports.searchingg = async function(req,res){
+    let payload = req.body.payload.trim();
+    let search = await Product.find({productName: {$regex: new RegExp('^'+payload+'.*','i')}}).exec();
+    search = search.splice(0,10)
+    res.send({payload: search});
+}
