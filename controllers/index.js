@@ -266,8 +266,9 @@ module.exports.removeFromCart=async function (req,res){
     console.log("removable",req.params.item_id,removable_item)
     let total = Number(user.cart[0])
     user.cart[0]= total - Number(removable_item[0].productPrice)
-    if total===0:
+    if (total===0){
         user.cart[0]=0
+    }
     await User.findOneAndUpdate({email:req.cookies.email},{cart:user.cart}) 
     return res.redirect("back")
 }
