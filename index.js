@@ -22,6 +22,11 @@ app.use(express.static(__dirname + 'assets'));
 app.use("/assets", express.static(__dirname + '/assets'));
 // initializing routes
 app.use("/", require("./routes"));
+// Error page
+app.use((req, res, next) => { 
+    res.status(404).send( 
+        "<h1>Page not found on the server</h1>") 
+})
 // to run our server
 app.listen(port,function(err){
     if(err){
