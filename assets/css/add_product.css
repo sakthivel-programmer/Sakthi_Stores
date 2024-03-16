@@ -1,0 +1,55 @@
+body {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  background-color: azure; }
+
+.innerDiv {
+  position: relative;
+  top: 70px;
+  height: auto;
+  width: 500px;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 10px; }
+
+.innerDiv img {
+  display: block;
+  border-radius: 10px;
+  width: 60%;
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: black 0px 0px 15px; }
+
+.innerDiv a {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  text-decoration: none; }
+
+input {
+  display: block;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid lightblue;
+  margin: auto;
+  margin-bottom: 20px; }
+
+button {
+  display: block;
+  margin: auto;
+  height: 40px;
+  margin-bottom: 20px;
+  border: 2px solid lightblue;
+  border-radius: 5px; }
+
+::-webkit-scrollbar {
+  display: none; }
+
+@media screen and (max-width: 700px) {
+  .innerDiv {
+    position: relative;
+    top: 20%;
+    width: auto;
+    margin: auto 10px; } }
