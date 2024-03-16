@@ -7,6 +7,14 @@ const bodyParser = require('body-parser');
 const app=express();
 // requiring cookie parser
 const cookieParser = require('cookie-parser');
+const sassMiddleware = require("node-sass-middleware")
+app.use(sassMiddleware({
+    src:"./assets/scss",
+    dest:"./assets/css",
+    debug:true,
+    outputStyle:"extended",
+    prefix:"/assets/css/"
+}))
 // body data parser
 app.use(bodyParser.json());
 app.use(express.urlencoded());
